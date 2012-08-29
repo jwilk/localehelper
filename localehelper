@@ -55,9 +55,7 @@ my %all_locales = map { normalize_encoding($_) => 1 } split(/\n/, `locale -a`);
 my %locales_to_generate = ();
 while (my ($category, $locale) = each %env) {
     my $nlocale = normalize_encoding($locale);
-    if ($category eq 'LANGUAGE') {
-        next; # FIXME!
-    }
+    next if $category eq 'LANGUAGE';
     if (not exists $all_locales{$nlocale}) {
         $locales_to_generate{$nlocale} = 1;
     }
