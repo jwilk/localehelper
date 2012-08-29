@@ -9,6 +9,7 @@ use File::Temp qw();
 
 my $myself = 'localehelper';
 
+my $category_re = qr/(?:LC_[A-Z]+|LANG|LANGUAGE)/;
 my $locale_with_encoding_re = qr/^([^.@]+)[.]([^.@]+)((?:@.+)?)$/;
 
 sub clean_environment($)
@@ -42,12 +43,10 @@ sub normalize_locale($)
     return $_;
 }
 
-my $locale_var_re = qr/^(?:LC_[A-Z]+|LANG(?:UAGE)?)/;
-
 my %env = ();
 while (scalar(@ARGV) > 0) {
     given ($ARGV[0]) {
-        when (m/^($locale_var_re)=(.*)$/) {
+        when (m/^($category_re)=(.*)$/) {
             my ($category, $locale) = ($1, $2);
             $env{$category} = $locale;
             shift @ARGV;
@@ -66,7 +65,7 @@ if (not @ARGV) {
     exit 0;
 }
 
-clean_environment(qr/^$locale_var_re$/);
+clean_environment(qr/^$category_re$/);
 
 delete $ENV{LOCPATH};
 
