@@ -41,7 +41,10 @@ clean_environment(qr/^$locale_var_re$/);
 
 my %all_locales = map { $_ => 1 } split(/\n/, `locale -a`);
 my %locales_to_generate = ();
-foreach my $locale (values %env) {
+while (my ($category, $locale) = each %env) {
+    if ($category eq 'LANGUAGE') {
+        next; # FIXME!
+    }
     if (not exists $all_locales{$locale}) {
         $locales_to_generate{$locale} = 1;
     }
