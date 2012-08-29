@@ -38,6 +38,23 @@ while (scalar(@ARGV) > 0) {
 }
 
 clean_environment(qr/^$locale_var_re$/);
+
+my %all_locales = map { $_ => 1 } split(/\n/, `locale -a`);
+my %locales_to_generate = ();
+foreach my $locale (values %env) {
+    if (not exists $all_locales{$locale}) {
+        $locales_to_generate{$locale} = 1;
+    }
+}
+
+if (%locales_to_generate) {
+    my @locales_to_generate = sort keys %locales_to_generate;
+    local $" = ', ';
+    print STDERR "localehelper: error: generating locales is not implemented yet; the following locales are missing:\n";
+    print STDERR "localehelper: info: the following locales are missing: @locales_to_generate\n";
+    exit 1;
+}
+
 update_environment(%env);
 
 exec @ARGV;
