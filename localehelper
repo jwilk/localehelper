@@ -21,10 +21,10 @@ sub update_environment(%)
 sub normalize_encoding($)
 {
     local ($_) = @_;
-    if (my ($prefix, $encoding) = m/^([^.]+[.])([^.]+)$/) {
+    if (my ($prefix, $encoding, $suffix) = m/^([^.@]+[.])([^.@]+)((?:@.+)?)$/) {
         $encoding =~ y/A-Z/a-z/;
         $encoding =~ s/[-_]//g;
-        return "$prefix$encoding";
+        return "$prefix$encoding$suffix";
     }
     return $_;
 }
