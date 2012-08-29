@@ -5,6 +5,10 @@ use warnings;
 
 use v5.10;
 
+use File::Temp qw();
+
+my $locale_with_encoding_re = qr/^([^.@]+)[.]([^.@]+)((?:@.+)?)$/;
+
 sub clean_environment($)
 {
     my ($regex) = @_;
@@ -21,10 +25,17 @@ sub update_environment(%)
 sub normalize_encoding($)
 {
     local ($_) = @_;
-    if (my ($prefix, $encoding, $suffix) = m/^([^.@]+[.])([^.@]+)((?:@.+)?)$/) {
-        $encoding =~ y/A-Z/a-z/;
-        $encoding =~ s/[-_]//g;
-        return "$prefix$encoding$suffix";
+    y/A-Z/a-z/;
+    s/[-_]//g;
+    return $_;
+}
+
+sub normalize_locale($)
+{
+    local ($_) = @_;
+    if (my ($prefix, $encoding, $suffix) = m/$locale_with_encoding_re/) {
+        $encoding = normalize_encoding($encoding);
+        return "$prefix.$encoding$suffix";
     }
     return $_;
 }
@@ -51,22 +62,46 @@ while (scalar(@ARGV) > 0) {
 
 clean_environment(qr/^$locale_var_re$/);
 
-my %all_locales = map { normalize_encoding($_) => 1 } split(/\n/, `locale -a`);
+delete $ENV{LOCPATH};
+
+my %all_locales = map { normalize_locale($_) => 1 } split(/\n/, `locale -a`);
+my $missing_locales = 0;
 my %locales_to_generate = ();
 while (my ($category, $locale) = each %env) {
-    my $nlocale = normalize_encoding($locale);
+    my $nlocale = normalize_locale($locale);
     next if $category eq 'LANGUAGE';
+    $locales_to_generate{$nlocale} = 1;
     if (not exists $all_locales{$nlocale}) {
-        $locales_to_generate{$nlocale} = 1;
+        $missing_locales = 1;
     }
 }
 
-if (%locales_to_generate) {
+if ($missing_locales) {
+    my %encodings = ();
+    for (glob '/usr/share/i18n/charmaps/*') {
+        s{.*/}{};
+        s/\.gz$//;
+        my $encoding = $_;
+        my $nencoding = normalize_encoding($_);
+        $encodings{$nencoding} = $encoding;
+    }
+    my $locpath = $ENV{LOCPATH} = File::Temp::tempdir('localehelper.XXXXXXXX', CLEANUP => 1, TMPDIR => 1);
     my @locales_to_generate = sort keys %locales_to_generate;
-    local $" = ', ';
-    print STDERR "localehelper: error: generating locales is not implemented yet; the following locales are missing:\n";
-    print STDERR "localehelper: info: the following locales are missing: @locales_to_generate\n";
-    exit 1;
+    for my $locale (keys %locales_to_generate) {
+        if (my ($prefix, $encoding, $suffix) = $locale =~ m/$locale_with_encoding_re/) {
+            $encoding = $encodings{$encoding};
+            $locale = "$prefix.$encoding$suffix";
+            next if -d "/usr/lib/locale/$locale/";
+            system('localedef', '-f', $encoding, '-i', "$prefix$suffix", "$locpath/$locale/");
+            if ($?) {
+                print STDERR "localehlper: error: localedef for $locale failed\n";
+                exit 1;
+            }
+        } else {
+            print STDERR "localehelper: error: cannot generate locale $locale\n";
+            exit 1;
+        }
+    }
 }
 
 update_environment(%env);
