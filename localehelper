@@ -60,6 +60,10 @@ while (scalar(@ARGV) > 0) {
     }
 }
 
+if (not @ARGV) {
+    exit 0;
+}
+
 clean_environment(qr/^$locale_var_re$/);
 
 delete $ENV{LOCPATH};
@@ -106,6 +110,8 @@ if ($missing_locales) {
 
 update_environment(%env);
 
-exec @ARGV;
+system { $ARGV[0] } @ARGV;
+
+exit $?;
 
 # vim:ts=4 sw=4 et
