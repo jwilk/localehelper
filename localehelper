@@ -1,0 +1,45 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use v5.10;
+
+sub clean_environment($)
+{
+    my ($regex) = @_;
+    my @keys_to_unset = grep { m/$regex/ } keys %ENV;
+    delete @ENV{@keys_to_unset};
+}
+
+sub update_environment(%)
+{
+    my %env = @_;
+    @ENV{keys(%env)} = values(%env);
+}
+
+my $locale_var_re = qr/^(?:LC_[A-Z]+|LANG(?:UAGE)?)/;
+
+my %env = ();
+while (scalar(@ARGV) > 0) {
+    given ($ARGV[0]) {
+        when (m/^($locale_var_re)=(.*)$/) {
+            $env{$1} = $2;
+            shift @ARGV;
+        }
+        when ('--') {
+            shift @ARGV;
+            last;
+        }
+        default {
+            last;
+        }
+    }
+}
+
+clean_environment(qr/^$locale_var_re$/);
+update_environment(%env);
+
+exec @ARGV;
+
+# vim:ts=4 sw=4 et
