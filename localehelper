@@ -18,13 +18,25 @@ sub update_environment(%)
     @ENV{keys(%env)} = values(%env);
 }
 
+sub normalize_encoding($)
+{
+    local ($_) = @_;
+    if (my ($prefix, $encoding) = m/^([^.]+[.])([^.]+)$/) {
+        $encoding =~ y/A-Z/a-z/;
+        $encoding =~ s/[-_]//g;
+        return "$prefix$encoding";
+    }
+    return $_;
+}
+
 my $locale_var_re = qr/^(?:LC_[A-Z]+|LANG(?:UAGE)?)/;
 
 my %env = ();
 while (scalar(@ARGV) > 0) {
     given ($ARGV[0]) {
         when (m/^($locale_var_re)=(.*)$/) {
-            $env{$1} = $2;
+            my ($category, $locale) = ($1, $2);
+            $env{$category} = $locale;
             shift @ARGV;
         }
         when ('--') {
@@ -39,14 +51,15 @@ while (scalar(@ARGV) > 0) {
 
 clean_environment(qr/^$locale_var_re$/);
 
-my %all_locales = map { $_ => 1 } split(/\n/, `locale -a`);
+my %all_locales = map { normalize_encoding($_) => 1 } split(/\n/, `locale -a`);
 my %locales_to_generate = ();
 while (my ($category, $locale) = each %env) {
+    my $nlocale = normalize_encoding($locale);
     if ($category eq 'LANGUAGE') {
         next; # FIXME!
     }
-    if (not exists $all_locales{$locale}) {
-        $locales_to_generate{$locale} = 1;
+    if (not exists $all_locales{$nlocale}) {
+        $locales_to_generate{$nlocale} = 1;
     }
 }
 
