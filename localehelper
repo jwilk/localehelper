@@ -7,6 +7,8 @@ use v5.10;
 
 use File::Temp qw();
 
+my $myself = 'localehelper';
+
 my $locale_with_encoding_re = qr/^([^.@]+)[.]([^.@]+)((?:@.+)?)$/;
 
 sub clean_environment($)
@@ -89,7 +91,7 @@ if ($missing_locales) {
         my $nencoding = normalize_encoding($_);
         $encodings{$nencoding} = $encoding;
     }
-    my $locpath = $ENV{LOCPATH} = File::Temp::tempdir('localehelper.XXXXXXXX', CLEANUP => 1, TMPDIR => 1);
+    my $locpath = $ENV{LOCPATH} = File::Temp::tempdir("$myself.XXXXXXXX", CLEANUP => 1, TMPDIR => 1);
     my @locales_to_generate = sort keys %locales_to_generate;
     for my $locale (keys %locales_to_generate) {
         if (my ($prefix, $encoding, $suffix) = $locale =~ m/$locale_with_encoding_re/) {
@@ -98,11 +100,11 @@ if ($missing_locales) {
             next if -d "/usr/lib/locale/$locale/";
             system('localedef', '-f', $encoding, '-i', "$prefix$suffix", "$locpath/$locale/");
             if ($?) {
-                print STDERR "localehlper: error: localedef for $locale failed\n";
+                print STDERR "$myself: error: localedef for $locale failed\n";
                 exit 1;
             }
         } else {
-            print STDERR "localehelper: error: cannot generate locale $locale\n";
+            print STDERR "$myself: error: cannot generate locale $locale\n";
             exit 1;
         }
     }
