@@ -70,18 +70,18 @@ clean_environment(qr/^$category_re$/);
 delete $ENV{LOCPATH};
 
 my %all_locales = map { normalize_locale($_) => 1 } split(/\n/, `locale -a`);
-my $missing_locales = 0;
+my $no_missing_locales = 1;
 my %locales_to_generate = ();
-while (my ($category, $locale) = each %env) {
-    my $nlocale = normalize_locale($locale);
+while (my ($category, $locales) = each %env) {
     next if $category eq 'LANGUAGE';
-    $locales_to_generate{$nlocale} = 1;
-    if (not exists $all_locales{$nlocale}) {
-        $missing_locales = 1;
-    }
+    local $" = ',';
+    my @nlocales = map { normalize_locale($_) } split(',', $locales);
+    $locales_to_generate{"@nlocales"} = 1;
+    $no_missing_locales &&= grep { exists $all_locales{$_} } @nlocales;
 }
 
-if ($missing_locales) {
+unless ($no_missing_locales) {
+    %all_locales = ();
     my %encodings = ();
     for (glob '/usr/share/i18n/charmaps/*') {
         s{.*/}{};
@@ -91,21 +91,37 @@ if ($missing_locales) {
         $encodings{$nencoding} = $encoding;
     }
     my $locpath = $ENV{LOCPATH} = File::Temp::tempdir("$myself.XXXXXXXX", CLEANUP => 1, TMPDIR => 1);
-    my @locales_to_generate = sort keys %locales_to_generate;
-    for my $locale (keys %locales_to_generate) {
-        if (my ($prefix, $encoding, $suffix) = $locale =~ m/$locale_with_encoding_re/) {
-            $encoding = $encodings{$encoding};
-            $locale = "$prefix.$encoding$suffix";
-            next if -d "/usr/lib/locale/$locale/";
-            system('localedef', '-f', $encoding, '-i', "$prefix$suffix", "$locpath/$locale/");
-            if ($?) {
-                print STDERR "$myself: error: localedef for $locale failed\n";
-                exit 1;
+    for my $locales (keys %locales_to_generate) {
+        my @locales = split(',', $locales);
+        for my $locale (@locales) {
+            if (my ($prefix, $encoding, $suffix) = $locale =~ m/$locale_with_encoding_re/) {
+                $encoding = $encodings{$encoding} // $encoding;
+                $locale = "$prefix.$encoding$suffix";
+                next if -d "/usr/lib/locale/$locale/";
+                system('localedef', '-f', $encoding, '-i', "$prefix$suffix", "$locpath/$locale/");
+                if ($?) {
+                    print STDERR "$myself: warning: localedef for $locale failed\n";
+                    next;
+                }
+                $all_locales{normalize_locale($locale)} = 1;
+                last;
+            } else {
+                print STDERR "$myself: warning: cannot generate locale $locale\n";
             }
-        } else {
-            print STDERR "$myself: error: cannot generate locale $locale\n";
-            exit 1;
         }
+    }
+}
+
+while (my ($category, $locales) = each %env) {
+    next if $category eq 'LANGUAGE';
+    my @all_locales = split(',', $locales);
+    my @existing_locales = grep { exists $all_locales{normalize_locale($_)} } @all_locales;
+    if (@existing_locales) {
+        $env{$category} = $existing_locales[0];
+    } else {
+        local $" = ', ';
+        print STDERR "$myself: error: missing locales @all_locales\n";
+        exit 1;
     }
 }
 
