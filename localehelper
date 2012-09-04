@@ -55,7 +55,7 @@ while (scalar(@ARGV) > 0) {
         when ('-x') {
             shift @ARGV;
             if (not @ARGV) {
-                print STDERR "$myself: error: -x requires an argument\n";
+                say STDERR "$myself: error: -x requires an argument";
                 exit 1;
             }
             push @extra_locales, split(',', shift @ARGV);
@@ -114,13 +114,13 @@ unless ($no_missing_locales) {
                 next if -d "/usr/lib/locale/$locale/";
                 system('localedef', '-f', $encoding, '-i', "$prefix$suffix", "$locpath/$locale/");
                 if ($?) {
-                    print STDERR "$myself: warning: localedef for $locale failed\n";
+                    say STDERR "$myself: warning: localedef for $locale failed";
                     next;
                 }
                 $all_locales{normalize_locale($locale)} = 1;
                 last;
             } else {
-                print STDERR "$myself: warning: cannot generate locale $locale\n";
+                say STDERR "$myself: warning: cannot generate locale $locale";
             }
         }
     }
@@ -134,7 +134,7 @@ while (my ($category, $locales) = each %env) {
         $env{$category} = $existing_locales[0];
     } else {
         local $" = ', ';
-        print STDERR "$myself: error: missing locales @all_locales\n";
+        say STDERR "$myself: error: missing locales @all_locales";
         exit 1;
     }
 }
