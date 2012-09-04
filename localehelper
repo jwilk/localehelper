@@ -43,6 +43,7 @@ sub normalize_locale($)
     return $_;
 }
 
+my @extra_locales = ();
 my %env = ();
 while (scalar(@ARGV) > 0) {
     given ($ARGV[0]) {
@@ -50,6 +51,14 @@ while (scalar(@ARGV) > 0) {
             my ($category, $locale) = ($1, $2);
             $env{$category} = $locale;
             shift @ARGV;
+        }
+        when ('-x') {
+            shift @ARGV;
+            if (not @ARGV) {
+                print STDERR "$myself: error: -x requires an argument\n";
+                exit 1;
+            }
+            push @extra_locales, split(',', shift @ARGV);
         }
         when ('--') {
             shift @ARGV;
@@ -78,6 +87,11 @@ while (my ($category, $locales) = each %env) {
     my @nlocales = map { normalize_locale($_) } split(',', $locales);
     $locales_to_generate{"@nlocales"} = 1;
     $no_missing_locales &&= grep { exists $all_locales{$_} } @nlocales;
+}
+for my $locale (@extra_locales) {
+    $locale = normalize_locale($locale);
+    $locales_to_generate{$locale} = 1;
+    $no_missing_locales &&= exists $all_locales{$locale};
 }
 
 unless ($no_missing_locales) {
