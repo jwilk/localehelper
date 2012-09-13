@@ -163,6 +163,10 @@ unless ($no_missing_locales) {
         $encodings{$nencoding} = $encoding;
     }
     my $locpath = $ENV{LOCPATH} = File::Temp::tempdir("$myself.XXXXXXXX", CLEANUP => 1, TMPDIR => 1);
+    for my $locale (qw(C POSIX)) {
+        delete $locales_to_generate{$locale};
+        $all_locales{$locale} = 1;
+    }
     for my $locales (keys %locales_to_generate) {
         my @locales = split(',', $locales);
         for my $locale (@locales) {
