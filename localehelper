@@ -28,6 +28,18 @@ localehelper - generate locales and set locale categories
 
 B<localehelper> [-x I<locale>[,I<locale>...]] [I<category>=I<locale>[,I<locale-fallback>...]]... [--] I<commandline>
 
+=head1 SEE ALSO
+
+=over
+
+=item *
+L<POSIX:2004|http://pubs.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap08.html#tag_08_02>
+
+=item *
+L<GNU gettext manual|http://www.gnu.org/software/gettext/manual/html_node/The-LANGUAGE-variable.html>
+
+=back
+
 =cut
 
 use strict;
