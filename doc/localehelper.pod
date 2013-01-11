@@ -1,14 +1,61 @@
+=encoding UTF-8
+
 =head1 NAME
 
-localehelper - generate locales and set locale categories
+localehelper - generate locales and set internationalization variables
 
 =head1 SYNOPSIS
 
 B<localehelper> [-x I<locale>[,I<locale>...]] [I<intvar>=I<locale>[,I<locale-fallback>...]]... [--] I<commandline>
 
-=head1 SEE ALSO
+=head1 DESCRIPTION
 
 =over
+
+=item 1.
+Set each internationalization variable to I<locale> (possibly falling back to I<locale-fallback>).
+
+=item 2.
+Unset all other internationalization variables.
+
+=item 3.
+If needed, generate missing locales (in a temporary location).
+
+=item 4.
+Run the specified command.
+
+=back
+
+=head1 OPTIONS
+
+=over
+
+=item B<-x> I<locale>[,I<locale>...]
+
+Make sure these locales are available, even when they are not used in any
+internationalization variable.
+
+=back
+
+=head1 EXAMPLES
+
+ $ localehelper LANG=es_ES.UTF-8 locale mon | xargs -n1 -d ';'
+ enero
+ febrero
+ marzo
+ abril
+ mayo
+ junio
+ julio
+ agosto
+ septiembre
+ octubre
+ noviembre
+ diciembre
+
+=head1 SEE ALSO
+
+=over 2
 
 =item *
 L<POSIX:2004|http://pubs.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap08.html#tag_08_02>
