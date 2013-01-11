@@ -1,5 +1,5 @@
-localehelper (0.1) UNRELEASED; urgency=low
+localehelper (0.1) unstable; urgency=low
 
   * Initial release.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Fri, 11 Jan 2013 22:27:34 +0100
+ -- Jakub Wilk <jwilk@jwilk.net>  Fri, 11 Jan 2013 23:04:08 +0100
