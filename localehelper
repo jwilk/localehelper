@@ -36,7 +36,7 @@ B<localehelper> [-x I<locale>[,I<locale>...]] [I<intvar>=I<locale>[,I<locale-fal
 L<POSIX:2004|http://pubs.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap08.html#tag_08_02>
 
 =item *
-L<GNU gettext manual|http://www.gnu.org/software/gettext/manual/html_node/The-LANGUAGE-variable.html>
+L<GNU gettext manual|http://www.gnu.org/software/gettext/manual/html_node/Setting-the-POSIX-Locale.html>
 
 =back
 
