@@ -26,7 +26,7 @@ localehelper - generate locales and set locale categories
 
 =head1 SYNOPSIS
 
-B<localehelper> [-x I<locale>[,I<locale>...]] [I<category>=I<locale>[,I<locale-fallback>...]]... [--] I<commandline>
+B<localehelper> [-x I<locale>[,I<locale>...]] [I<intvar>=I<locale>[,I<locale-fallback>...]]... [--] I<commandline>
 
 =head1 SEE ALSO
 
