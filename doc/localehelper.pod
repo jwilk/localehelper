@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-localehelper - generate locales and set internationalization variables
+localehelper - generate locales and set internationalization environment variables
 
 =head1 SYNOPSIS
 
@@ -13,10 +13,10 @@ B<localehelper> [-x I<locale>[,I<locale>...]] [I<intvar>=I<locale>[,I<locale-fal
 =over
 
 =item 1.
-Set each internationalization variable to I<locale> (possibly falling back to I<locale-fallback>).
+Set each internationalization environment variable to I<locale> (possibly falling back to I<locale-fallback>).
 
 =item 2.
-Unset all other internationalization variables.
+Unset all other internationalization environment variables.
 
 =item 3.
 If needed, generate missing locales (in a temporary location).
@@ -33,7 +33,7 @@ Run the specified command.
 =item B<-x> I<locale>[,I<locale>...]
 
 Make sure these locales are available, even when they are not used in any
-internationalization variable.
+internationalization environment variable.
 
 =back
 
