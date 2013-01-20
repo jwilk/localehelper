@@ -37,6 +37,70 @@ internationalization environment variable.
 
 =back
 
+=head1 ENVIRONMENT
+
+The following environment variables can be set or unset by B<localehelper>:
+
+=over
+
+=item B<LANG>
+
+fall-back for B<LC_I<*>> variables
+
+=item B<LC_COLLATE>
+
+affects regular expression matching and string collation.
+
+=item B<LC_CTYPE>
+
+affects regular expression matching, character classification, conversion, case-sensitive comparison, and wide character functions
+
+=item B<LC_MESSAGES>
+
+affects natural-language messages
+
+=item B<LC_MONETARY>
+
+affects monetary formatting
+
+=item B<LC_NUMERIC>
+
+affects number formatting
+
+=item B<LC_TIME>
+
+affects time and date formatting
+
+=item other B<LC_I<*>>
+
+may affect other linguistic and cultural aspects
+
+=item B<LC_ALL>
+
+overrides all B<LC_I<*>>
+
+=item B<LANGUAGE>
+
+affects natural-language messages
+
+=back
+
+The following environment variable my be used by users to announce specific
+localization requirements to applications, but are left intact by
+B<localehelper>:
+
+=over
+
+=item B<NLSPATH>
+
+message catalogue path for L<catopen(3)>
+
+=item B<TEXTDOMAIN>
+
+message catalogue domain for L<gettext(1)>
+
+=back
+
 =head1 EXAMPLES
 
  $ localehelper LANG=es_ES.UTF-8 locale mon | xargs -n1 -d ';'
@@ -56,6 +120,9 @@ internationalization environment variable.
 =head1 SEE ALSO
 
 =over 2
+
+=item *
+L<locale(7)>
 
 =item *
 L<POSIX:2004|http://pubs.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap08.html#tag_08_02>
