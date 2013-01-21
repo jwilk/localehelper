@@ -1,9 +1,9 @@
-localehelper (0.1.1) UNRELEASED; urgency=low
+localehelper (0.1.1) unstable; urgency=low
 
   * Improve the documentation.
   * Fix command-line argument parsing.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Mon, 21 Jan 2013 12:53:03 +0100
+ -- Jakub Wilk <jwilk@jwilk.net>  Mon, 21 Jan 2013 13:02:01 +0100
 
 localehelper (0.1) unstable; urgency=low
 
