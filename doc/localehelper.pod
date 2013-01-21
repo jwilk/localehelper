@@ -8,6 +8,8 @@ localehelper - generate locales and set internationalization environment variabl
 
 B<localehelper> [-x I<locale>[,I<locale>...]] [I<intvar>=I<locale>[,I<locale-fallback>...]]... [--] I<commandline>
 
+B<localehelper> {-h | --help}
+
 =head1 DESCRIPTION
 
 =over
@@ -34,6 +36,10 @@ Run the specified command.
 
 Make sure these locales are available, even when they are not used in any
 internationalization environment variable.
+
+=item B<-h>, B<--help>
+
+Display help and exit.
 
 =back
 
