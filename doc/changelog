@@ -1,8 +1,8 @@
 localehelper (0.1.1) UNRELEASED; urgency=low
 
-  * 
+  * Improve the documentation.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Sat, 12 Jan 2013 15:05:31 +0100
+ -- Jakub Wilk <jwilk@jwilk.net>  Mon, 21 Jan 2013 12:51:39 +0100
 
 localehelper (0.1) unstable; urgency=low
 
