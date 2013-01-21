@@ -110,7 +110,7 @@ while (scalar(@ARGV) > 0) {
             }
             push @extra_locales, split(',', shift @ARGV);
         }
-        when (m/^(-h|--help)/) {
+        when (m/^(-h|--help)$/) {
             show_usage();
             exit 1;
         }
