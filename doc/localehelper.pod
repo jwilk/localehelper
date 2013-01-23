@@ -105,6 +105,10 @@ message catalogue path for L<catopen(3)>
 
 message catalogue domain for L<gettext(1)>
 
+=item B<TEXTDOMAINDIR>
+
+message catalogue directory for L<gettext(1)>
+
 =back
 
 =head1 EXAMPLES
