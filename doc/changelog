@@ -1,4 +1,4 @@
-localehelper (0.1.2) UNRELEASED; urgency=low
+localehelper (0.1.2) unstable; urgency=low
 
   * Improve the manual page:
     - Work around a pod2man bug: manual page references should be rendered in
@@ -8,7 +8,7 @@ localehelper (0.1.2) UNRELEASED; urgency=low
     - Document that TEXTDOMAINDIR environment variable is left untouched.
   * Disable warnings about use of smartmatch.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Tue, 28 May 2013 18:46:51 +0200
+ -- Jakub Wilk <jwilk@jwilk.net>  Tue, 28 May 2013 18:53:30 +0200
 
 localehelper (0.1.1) unstable; urgency=low
 
