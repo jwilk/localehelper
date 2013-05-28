@@ -91,7 +91,7 @@ affects natural-language messages
 
 =back
 
-The following environment variable my be used by users to announce specific
+The following environment variables may be used by users to announce specific
 localization requirements to applications, but are left intact by
 B<localehelper>:
 
