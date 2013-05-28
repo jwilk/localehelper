@@ -30,6 +30,7 @@ use strict;
 use warnings;
 
 use v5.10;
+no if $] >= 5.018, warnings => 'experimental::smartmatch';
 
 use File::Temp qw();
 
