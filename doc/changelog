@@ -1,8 +1,8 @@
 localehelper (0.1.3) UNRELEASED; urgency=low
 
-  * 
+  * Fix encoding normalization code.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Tue, 28 May 2013 18:56:00 +0200
+ -- Jakub Wilk <jwilk@jwilk.net>  Wed, 15 Jan 2014 23:33:27 +0100
 
 localehelper (0.1.2) unstable; urgency=low
 
