@@ -89,7 +89,7 @@ sub show_usage()
         when (m/^=/) {
             last if $in_synopsis;
         }
-        when (m/^(\S.*)/) {
+        when (m/^\S.*/) {
             if ($in_synopsis) {
                 s/B<(.*?)>/$1/g;
                 s/I(<.*?>)/$1/g;
