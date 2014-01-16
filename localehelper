@@ -231,7 +231,7 @@ while (my ($category, $locales) = each %env) {
 update_environment(%env);
 
 system { $ARGV[0] } @ARGV;  ## no critic (RequireCheckedSyscalls)
-
-exit $CHILD_ERROR;
+my $exit_code = ($CHILD_ERROR & 127) ? 1 : ($CHILD_ERROR >> 8);
+exit($exit_code);
 
 # vim:ts=4 sw=4 et
