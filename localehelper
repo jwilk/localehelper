@@ -194,7 +194,11 @@ unless ($no_missing_locales) {
                     last;
                 }
                 $encoding = $encodings{$nencoding} // $encoding;
-                system('localedef', '-f', $encoding, '-i', "$prefix$suffix", "$locpath/$nlocale/");
+                system('localedef',  ## no critic (RequireCheckedSyscalls)
+                    '-f', $encoding,
+                    '-i', "$prefix$suffix",
+                    "$locpath/$nlocale/"
+                );
                 if ($CHILD_ERROR) {
                     diag("warning: localedef for $locale failed");
                     next
@@ -226,7 +230,7 @@ while (my ($category, $locales) = each %env) {
 
 update_environment(%env);
 
-system { $ARGV[0] } @ARGV;
+system { $ARGV[0] } @ARGV;  ## no critic (RequireCheckedSyscalls)
 
 exit $CHILD_ERROR;
 
