@@ -18,6 +18,9 @@ lines = 20
 [-InputOutput::RequireCheckedClose]
 # already covered by RequireCheckedSyscalls
 
+[InputOutput::RequireCheckedSyscalls]
+functions = :builtins
+
 [-Modules::RequireVersionVar]
 # useful only for modules
 
