@@ -147,7 +147,12 @@ clean_environment(qr/^$category_re$/);
 
 delete $ENV{LOCPATH};
 
-my %all_locales = map { $_ => 1 } split(/\n/, qx(locale -a));
+my $locale_list = qx(locale -b);
+if ($? != 0) {
+    diag('warning: locale(1) failed');
+    $locale_list = '';
+}
+my %all_locales = map { $_ => 1 } split(/\n/, $locale_list);
 my $no_missing_locales = 1;
 my %locales_to_generate = ();
 while (my ($category, $locales) = each %env) {
