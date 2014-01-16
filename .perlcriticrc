@@ -1,0 +1,41 @@
+severity = 1
+verbose = 1
+
+[-CodeLayout::ProhibitParensWithBuiltins]
+# no, thanks
+
+[-Documentation::RequirePodSections]
+# we keep the actual POD in a separate file
+
+[-ErrorHandling::RequireCarping]
+# die is good enough for our purposes
+
+[InputOutput::RequireBriefOpen]
+lines = 20
+
+[-InputOutput::RequireCheckedOpen]
+[-InputOutput::RequireCheckedClose]
+# already covered by RequireCheckedSyscalls
+
+[-Modules::RequireVersionVar]
+# useful only for modules
+
+[-RegularExpressions::RequireExtendedFormatting]
+# no, thanks
+
+[-RegularExpressions::RequireDotMatchAnything]
+[-RegularExpressions::RequireLineBoundaryMatching]
+# we work mostly with single-line strings
+# reconsider when https://github.com/Perl-Critic/Perl-Critic/issues/551 is fixed
+
+[-RegularExpressions::ProhibitEnumeratedClasses]
+# we work mostly with ASCII
+
+[-ValuesAndExpressions::ProhibitNoisyQuotes]
+[-ValuesAndExpressions::ProhibitEmptyQuotes]
+# no, thanks
+
+[-ValuesAndExpressions::ProhibitVersionStrings]
+# we don't care about Perl << 5.6, which doesn't support version strings
+
+# vim:ft=dosini
