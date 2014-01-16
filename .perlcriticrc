@@ -4,8 +4,9 @@ verbose = 1
 [-CodeLayout::ProhibitParensWithBuiltins]
 # no, thanks
 
-[-Documentation::RequirePodSections]
+[-Documentation::PodSpelling]
 [-Documentation::RequirePodAtEnd]
+[-Documentation::RequirePodSections]
 # we keep the actual POD in a separate file
 
 [-ErrorHandling::RequireCarping]
