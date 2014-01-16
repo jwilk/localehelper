@@ -175,7 +175,7 @@ unless ($no_missing_locales) {
     my %encodings = ();
     for (glob '/usr/share/i18n/charmaps/*') {
         s{.*/}{};
-        s/\.gz$//;
+        s/[.]gz$//;
         my $encoding = $_;
         my $nencoding = normalize_encoding($_);
         $encodings{$nencoding} = $encoding;
