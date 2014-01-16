@@ -80,7 +80,7 @@ sub normalize_locale($)
 
 sub show_usage()
 {
-    open(my $fh, '<', $PROGRAM_NAME) or die;
+    open(my $fh, '<', $PROGRAM_NAME) or die "$PROGRAM_NAME: $ERRNO";
     my $in_synopsis = 0;
     foreach (<$fh>) {
         chomp;
