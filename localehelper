@@ -82,15 +82,13 @@ sub show_usage()
 {
     open(my $fh, '<', $PROGRAM_NAME) or die "$PROGRAM_NAME: $ERRNO";
     my $in_synopsis = 0;
-    foreach (<$fh>) {
+    while (<$fh>) {
         chomp;
-        when (m/^=head1\s+SYNOPSIS$/) {
+        if (m/^=head1\s+SYNOPSIS$/) {
             $in_synopsis = 1;
-        }
-        when (m/^=/) {
+        } elsif (m/^=/) {
             last if $in_synopsis;
-        }
-        when (m/^\S.*/) {
+        } elsif (m/^\S.*/) {
             if ($in_synopsis) {
                 s/B<(.*?)>/$1/g;
                 s/I(<.*?>)/$1/g;
