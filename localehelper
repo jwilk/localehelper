@@ -163,7 +163,8 @@ for my $locale (@extra_locales) {
     $no_missing_locales &&= exists $all_locales{$nlocale};
 }
 
-unless ($no_missing_locales) {
+my $missing_locales = not $no_missing_locales;
+if ($missing_locales) {
     %all_locales = (
         C => 1,
         POSIX => 1,
