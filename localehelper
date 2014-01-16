@@ -93,7 +93,7 @@ sub show_usage()
             if ($in_synopsis) {
                 s/B<(.*?)>/$1/g;
                 s/I(<.*?>)/$1/g;
-                say STDERR "Usage: $_";
+                say {*STDERR} "Usage: $_";
                 return;
             }
         }
@@ -113,7 +113,7 @@ while (scalar(@ARGV) > 0) {
         when ('-x') {
             shift @ARGV;
             if (not @ARGV) {
-                say STDERR "$myself: error: -x requires an argument";
+                say {*STDERR} "$myself: error: -x requires an argument";
                 exit 1;
             }
             push @extra_locales, split(m/,/, shift @ARGV);
@@ -188,13 +188,13 @@ unless ($no_missing_locales) {
                 $encoding = $encodings{$nencoding} // $encoding;
                 system('localedef', '-f', $encoding, '-i', "$prefix$suffix", "$locpath/$nlocale/");
                 if ($?) {
-                    say STDERR "$myself: warning: localedef for $locale failed";
+                    say {*STDERR} "$myself: warning: localedef for $locale failed";
                     next;
                 }
                 $all_locales{$nlocale} = 1;
                 last;
             } else {
-                say STDERR "$myself: warning: cannot generate locale $locale";
+                say {*STDERR} "$myself: warning: cannot generate locale $locale";
             }
         }
     }
@@ -211,7 +211,7 @@ while (my ($category, $locales) = each %env) {
         $env{$category} = $existing_locales[0];
     } else {
         local $" = ', ';
-        say STDERR "$myself: error: missing locales @locales";
+        say {*STDERR} "$myself: error: missing locales @locales";
         exit 1;
     }
 }
