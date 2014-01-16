@@ -148,7 +148,7 @@ clean_environment(qr/^$category_re$/);
 delete $ENV{LOCPATH};
 
 my $locale_list = qx(locale -b);
-if ($? != 0) {
+if ($CHILD_ERROR != 0) {
     diag('warning: locale(1) failed');
     $locale_list = '';
 }

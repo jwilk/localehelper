@@ -1,19 +1,19 @@
   1 files.
   6 subroutines/methods.
-223 statements.
+229 statements.
 
-237 lines, consisting of:
+242 lines, consisting of:
      23 blank lines.
      22 comment lines.
       0 data lines.
-    187 lines of Perl code.
+    192 lines of Perl code.
       5 lines of POD.
 
 Average McCabe score of subroutines was 3.00.
 
 4 violations.
 Violations per file was 4.000.
-Violations per statement was 0.018.
+Violations per statement was 0.017.
 Violations per line of code was 0.017.
 
 2 severity 4 violations.
