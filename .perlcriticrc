@@ -32,6 +32,9 @@ lines = 20
 [-RegularExpressions::ProhibitEnumeratedClasses]
 # we work mostly with ASCII
 
+[-Subroutines::ProhibitSubroutinePrototypes]
+# no, thanks
+
 [-ValuesAndExpressions::ProhibitNoisyQuotes]
 [-ValuesAndExpressions::ProhibitEmptyQuotes]
 # no, thanks
