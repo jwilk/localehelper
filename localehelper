@@ -78,6 +78,42 @@ sub normalize_locale($)
     return $_;
 }
 
+sub get_all_locales()
+{
+    my %map = ();
+    if (defined $ENV{LOCPATH}) {
+        my @lst;
+        push @lst, 'C';
+        push @lst, 'POSIX';
+        for (glob '/usr/lib/locale/*/') {
+            s{.*/(.*)/}{$1} or die;
+            push @lst, $1;
+        }
+        return @lst;
+    } else {
+        my $locale_list = qx(locale -a);
+        if ($CHILD_ERROR != 0) {
+            diag('warning: locale(1) failed');
+            $locale_list = '';
+        }
+        return split(/\n/, $locale_list);
+    }
+    return %map;
+}
+
+sub get_encoding_map()
+{
+    my %encodings = ();
+    for (glob '/usr/share/i18n/charmaps/*') {
+        s{.*/}{};
+        s/[.]gz$//;
+        my $encoding = $_;
+        my $nencoding = normalize_encoding($_);
+        $encodings{$nencoding} = $encoding;
+    }
+    return \%encodings;
+}
+
 sub show_usage()
 {
     open(my $fh, '<', $PROGRAM_NAME) or die "$PROGRAM_NAME: $ERRNO";
@@ -152,7 +188,7 @@ if ($CHILD_ERROR != 0) {
     diag('warning: locale(1) failed');
     $locale_list = '';
 }
-my %all_locales = map { $_ => 1 } split(/\n/, $locale_list);
+my %all_locales = map { $_ => 1 } get_all_locales();
 my $no_missing_locales = 1;
 my %locales_to_generate = ();
 while (my ($category, $locales) = each %env) {
@@ -169,23 +205,9 @@ for my $locale (@extra_locales) {
 
 my $missing_locales = not $no_missing_locales;
 if ($missing_locales) {
-    %all_locales = (
-        C => 1,
-        POSIX => 1,
-    );
-    for (glob '/usr/lib/locale/*/') {
-        s{.*/(.*)/}{$1} or die;
-        $all_locales{$1} = 1;
-    }
-    my %encodings = ();
-    for (glob '/usr/share/i18n/charmaps/*') {
-        s{.*/}{};
-        s/[.]gz$//;
-        my $encoding = $_;
-        my $nencoding = normalize_encoding($_);
-        $encodings{$nencoding} = $encoding;
-    }
+    my %encodings = %{get_encoding_map()};
     my $locpath = $ENV{LOCPATH} = File::Temp::tempdir("$myself.XXXXXXXX", CLEANUP => 1, TMPDIR => 1);
+    %all_locales = map { $_ => 1 } get_all_locales();
     for my $locales (keys %locales_to_generate) {
         my @locales = split(m/,/, $locales);
         for my $locale (@locales) {
