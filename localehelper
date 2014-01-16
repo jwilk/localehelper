@@ -116,7 +116,7 @@ while (scalar(@ARGV) > 0) {
                 say STDERR "$myself: error: -x requires an argument";
                 exit 1;
             }
-            push @extra_locales, split(',', shift @ARGV);
+            push @extra_locales, split(m/,/, shift @ARGV);
         }
         when (m/^(-h|--help)$/) {
             show_usage();
@@ -146,7 +146,7 @@ my %locales_to_generate = ();
 while (my ($category, $locales) = each %env) {
     next if $category eq 'LANGUAGE';
     $locales_to_generate{$locales} = 1;
-    my @nlocales = map { normalize_locale($_) } split(',', $locales);
+    my @nlocales = map { normalize_locale($_) } split(m/,/, $locales);
     $no_missing_locales &&= grep { exists $all_locales{$_} } @nlocales;
 }
 for my $locale (@extra_locales) {
@@ -174,7 +174,7 @@ unless ($no_missing_locales) {
     }
     my $locpath = $ENV{LOCPATH} = File::Temp::tempdir("$myself.XXXXXXXX", CLEANUP => 1, TMPDIR => 1);
     for my $locales (keys %locales_to_generate) {
-        my @locales = split(',', $locales);
+        my @locales = split(m/,/, $locales);
         for my $locale (@locales) {
             if (exists $all_locales{$locale}) {
                 last;
@@ -202,7 +202,7 @@ unless ($no_missing_locales) {
 
 while (my ($category, $locales) = each %env) {
     next if $category eq 'LANGUAGE';
-    my @locales = split(',', $locales);
+    my @locales = split(m/,/, $locales);
     my @existing_locales = grep {
         exists $all_locales{$_} or
         exists $all_locales{normalize_locale($_)}
