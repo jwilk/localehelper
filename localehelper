@@ -91,12 +91,12 @@ sub get_all_locales()
         }
         return @lst;
     } else {
-        my $locale_list = qx(locale -a);
+        my $lst = qx(locale -a);
         if ($CHILD_ERROR != 0) {
             diag('warning: locale(1) failed');
-            $locale_list = '';
+            $lst = '';
         }
-        return split(/\n/, $locale_list);
+        return split(/\n/, $lst);
     }
     return %map;
 }
