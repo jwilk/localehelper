@@ -44,12 +44,14 @@ sub clean_environment($)
     my ($regex) = @_;
     my @keys_to_unset = grep { m/$regex/ } keys %ENV;
     delete @ENV{@keys_to_unset};
+    return;
 }
 
 sub update_environment(%)
 {
     my %env = @_;
     @ENV{keys(%env)} = values(%env);
+    return;
 }
 
 sub normalize_encoding($)
