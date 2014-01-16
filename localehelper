@@ -93,6 +93,7 @@ sub show_usage()
                 s/B<(.*?)>/$1/g;
                 s/I(<.*?>)/$1/g;
                 say {*STDERR} "Usage: $_" or die $ERRNO;
+                close($fh) or die "$PROGRAM_NAME: $ERRNO";
                 return;
             }
         }
