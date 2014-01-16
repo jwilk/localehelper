@@ -32,6 +32,7 @@ use warnings;
 use v5.10;
 no if $] >= 5.018, warnings => 'experimental::smartmatch';
 
+use English qw(-no_match_vars);
 use File::Temp qw();
 
 my $myself = 'localehelper';
@@ -79,7 +80,7 @@ sub normalize_locale($)
 
 sub show_usage()
 {
-    open(my $fh, '<', $0) or die;
+    open(my $fh, '<', $PROGRAM_NAME) or die;
     my $in_synopsis = 0;
     foreach (<$fh>) {
         chomp;
@@ -93,7 +94,7 @@ sub show_usage()
             if ($in_synopsis) {
                 s/B<(.*?)>/$1/g;
                 s/I(<.*?>)/$1/g;
-                say {*STDERR} "Usage: $_" or die $!;
+                say {*STDERR} "Usage: $_" or die $ERRNO;
                 return;
             }
         }
@@ -194,7 +195,7 @@ unless ($no_missing_locales) {
                 }
                 $encoding = $encodings{$nencoding} // $encoding;
                 system('localedef', '-f', $encoding, '-i', "$prefix$suffix", "$locpath/$nlocale/");
-                if ($?) {
+                if ($CHILD_ERROR) {
                     diag("warning: localedef for $locale failed");
                     next
                 }
@@ -217,7 +218,7 @@ while (my ($category, $locales) = each %env) {
     if (@existing_locales) {
         $env{$category} = $existing_locales[0];
     } else {
-        local $" = ', ';
+        local $LIST_SEPARATOR = ', ';
         diag("error: missing locales @locales");
         exit 1;
     }
@@ -227,6 +228,6 @@ update_environment(%env);
 
 system { $ARGV[0] } @ARGV;
 
-exit $?;
+exit $CHILD_ERROR;
 
 # vim:ts=4 sw=4 et
