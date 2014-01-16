@@ -11,22 +11,21 @@
 
 Average McCabe score of subroutines was 2.40.
 
-41 violations.
-Violations per file was 41.000.
-Violations per statement was 0.201.
-Violations per line of code was 0.184.
+40 violations.
+Violations per file was 40.000.
+Violations per statement was 0.196.
+Violations per line of code was 0.179.
 
  5 severity 5 violations.
  6 severity 4 violations.
  6 severity 3 violations.
 10 severity 2 violations.
-14 severity 1 violations.
+13 severity 1 violations.
 
 4 violations of BuiltinFunctions::ProhibitStringySplit.
 1 violations of CodeLayout::RequireTidyCode.
 1 violations of ControlStructures::ProhibitUnlessBlocks.
 1 violations of Documentation::PodSpelling.
-1 violations of Documentation::RequirePodAtEnd.
 1 violations of InputOutput::ProhibitBacktickOperators.
 1 violations of InputOutput::ProhibitReadlineInForLoop.
 5 violations of InputOutput::RequireBracedFileHandleWithPrint.

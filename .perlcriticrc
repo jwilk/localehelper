@@ -5,6 +5,7 @@ verbose = 1
 # no, thanks
 
 [-Documentation::RequirePodSections]
+[-Documentation::RequirePodAtEnd]
 # we keep the actual POD in a separate file
 
 [-ErrorHandling::RequireCarping]
