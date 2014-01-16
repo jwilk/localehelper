@@ -42,6 +42,9 @@ functions = :builtins
 [-ValuesAndExpressions::ProhibitEmptyQuotes]
 # no, thanks
 
+[-ValuesAndExpressions::ProhibitMagicNumbers]
+# no, thanks
+
 [-ValuesAndExpressions::ProhibitVersionStrings]
 # we don't care about Perl << 5.6, which doesn't support version strings
 
