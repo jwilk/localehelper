@@ -170,7 +170,7 @@ if ($missing_locales) {
         POSIX => 1,
     );
     for (glob '/usr/lib/locale/*/') {
-        s{.*/(.*)/}{$1};
+        s{.*/(.*)/}{$1} or die;
         $all_locales{$1} = 1;
     }
     my %encodings = ();
