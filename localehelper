@@ -59,11 +59,11 @@ sub normalize_encoding($)
 {
     # https://sourceware.org/git/?p=glibc.git;a=blob;f=intl/l10nflist.c;h=3d8344be7b9cb65ac2a7764a47aac4af424dcca8;hb=eefa3be8e4c2c721a9f277d8ea2e11180231829f#l313
     local ($_) = @_;
+    s/[^a-zA-Z0-9]+//g;
     if (m/^[0-9]+/) {
         return "iso$_";
     } else {
         y/A-Z/a-z/;
-        s/[^a-z0-9]+//g;
         return $_;
     }
 }
