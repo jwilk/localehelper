@@ -2,8 +2,9 @@ localehelper (0.1.4) UNRELEASED; urgency=low
 
   * Fix encoding normalization code for encodings containing only digits and
     punctuation characters.
+  * Use HTTPS URLs when they are available, in documentation and code.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Fri, 17 Jan 2014 20:07:24 +0100
+ -- Jakub Wilk <jwilk@jwilk.net>  Sun, 11 May 2014 23:11:30 +0200
 
 localehelper (0.1.3) unstable; urgency=low
 
@@ -18,7 +19,7 @@ localehelper (0.1.2) unstable; urgency=low
   * Improve the manual page:
     - Work around a pod2man bug: manual page references should be rendered in
       bold, not in italics.
-      http://bugs.debian.org/280148
+      https://bugs.debian.org/280148
     - Make the title all uppercase.
     - Document that TEXTDOMAINDIR environment variable is left untouched.
   * Disable warnings about use of smartmatch.
