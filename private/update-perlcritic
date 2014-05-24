@@ -3,7 +3,7 @@ set -e -u
 here=$(basename "$0")
 cd "$here/.."
 target=doc/todo.perlcritic
-if perlcritic --statistics-only localehelper > "${target}.new"
+if perlcritic --verbose '%p\n' localehelper | sort | uniq -c > "${target}.new"
 then
     :
 else
