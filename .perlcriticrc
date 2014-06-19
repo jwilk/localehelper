@@ -4,6 +4,9 @@ verbose = 1
 [-CodeLayout::ProhibitParensWithBuiltins]
 # no, thanks
 
+[-CodeLayout::RequireTidyCode]
+# no, thanks
+
 [-Documentation::PodSpelling]
 [-Documentation::RequirePodAtEnd]
 [-Documentation::RequirePodSections]
