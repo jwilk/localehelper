@@ -1,2 +1,4 @@
 syntax: glob
+
+cover_db/
 doc/*.[1-9]
