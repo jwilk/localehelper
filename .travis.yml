@@ -1,0 +1,11 @@
+language: perl
+perl:
+- "5.10"
+- "5.20"
+- "5.21"
+install:
+- cpanm Perl::Critic
+script:
+- make -C doc/
+- '! private/update-perlcritic | grep ""'
+- perl localehelper LANG=es_ES.UTF-8 locale mon | xargs -n1 -d ';'
