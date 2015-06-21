@@ -22,6 +22,7 @@ fi
 cd "$sourceroot"/*
 make -C doc/
 rm -rf .hg*
+rm -rf .travis.yml
 cd ..
 tar -czf "$pwd/$name-$version.tar.gz" */
 rm -rf "$sourceroot"
