@@ -4,8 +4,10 @@ perl:
 - "5.20"
 - "5.21"
 install:
+- cpanm Perl::MinimumVersion
 - cpanm Perl::Critic
 script:
 - make -C doc/
 - '! private/update-perlcritic | grep ""'
 - ./localehelper LANG=es_ES.UTF-8 locale mon | xargs -n1 -d ';'
+- prove --verbose
