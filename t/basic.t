@@ -38,4 +38,3 @@ is($CHILD_ERROR, 0, 'exit code 0');
 is($output, "enero;febrero;marzo;abril;mayo;junio;julio;agosto;septiembre;octubre;noviembre;diciembre\n", 'correctly localized output');
 
 # vim:ts=4 sts=4 sw=4 et
-
