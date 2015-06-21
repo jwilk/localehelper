@@ -85,7 +85,6 @@ sub normalize_locale($)
 
 sub get_all_locales()
 {
-    my %map = ();
     if (defined $ENV{LOCPATH}) {
         my @lst;
         push @lst, 'C';
@@ -103,7 +102,6 @@ sub get_all_locales()
         }
         return split(/\n/, $lst);
     }
-    return %map;
 }
 
 sub get_encoding_map()
