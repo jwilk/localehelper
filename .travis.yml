@@ -8,4 +8,4 @@ install:
 script:
 - make -C doc/
 - '! private/update-perlcritic | grep ""'
-- perl localehelper LANG=es_ES.UTF-8 locale mon | xargs -n1 -d ';'
+- ./localehelper LANG=es_ES.UTF-8 locale mon | xargs -n1 -d ';'
