@@ -32,7 +32,7 @@ use FindBin ();
 
 use Test::More tests => 2;
 
-my $exe = "$FindBin::Bin/../localehelper";
+my $exe = $ENV{LOCALEHELPER_COMMANDLINE} // "$FindBin::Bin/../localehelper";
 my $output = qx($exe LANG=es_ES.UTF-8 locale mon);
 is($CHILD_ERROR, 0);
 is($output, "enero;febrero;marzo;abril;mayo;junio;julio;agosto;septiembre;octubre;noviembre;diciembre\n");
