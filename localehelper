@@ -139,7 +139,7 @@ sub show_usage()
             }
         }
     }
-    die; # should not happen
+    die;  # uncoverable statement
 }
 
 sub diag(@)
