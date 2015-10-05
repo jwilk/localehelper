@@ -8,7 +8,7 @@ localehelper (0.1.4) UNRELEASED; urgency=low
   * Add a basic test suite.
   * Use HTTPS URLs when they are available, in documentation and code.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Mon, 22 Jun 2015 08:46:09 +0200
+ -- Jakub Wilk <jwilk@jwilk.net>  Mon, 05 Oct 2015 23:15:10 +0200
 
 localehelper (0.1.3) unstable; urgency=low
 
