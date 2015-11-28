@@ -137,7 +137,7 @@ sub show_usage()
             }
         }
     }
-    die;  # uncoverable statement
+    die;  # unreachable statement
 }
 
 sub diag(@)
