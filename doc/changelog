@@ -27,11 +27,11 @@ localehelper (0.1.3) unstable; urgency=low
 localehelper (0.1.2) unstable; urgency=low
 
   * Improve the manual page:
-    - Work around a pod2man bug: manual page references should be rendered in
+    + Work around a pod2man bug: manual page references should be rendered in
       bold, not in italics.
       https://bugs.debian.org/280148
-    - Make the title all uppercase.
-    - Document that TEXTDOMAINDIR environment variable is left untouched.
+    + Make the title all uppercase.
+    + Document that TEXTDOMAINDIR environment variable is left untouched.
   * Disable warnings about use of smartmatch.
 
  -- Jakub Wilk <jwilk@jwilk.net>  Tue, 28 May 2013 18:53:30 +0200
