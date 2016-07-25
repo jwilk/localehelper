@@ -7,5 +7,5 @@ install:
 - cpanm Perl::Critic
 script:
 - make -C doc/
-- '! private/update-perlcritic | grep ""'
+- private/run-perlcritic
 - prove --verbose

@@ -1,0 +1,27 @@
+#!/bin/sh
+set -e -u
+
+export LC_ALL=C
+here=$(basename "$0")
+cd "$here/.."
+
+sed -n -r -e '/^\[-?/ { s///; s/\]$//; p }' .perlcriticrc \
+| sort -c
+
+target=$(mktemp -t mbank-cli.perlcritic.XXXXXX)
+
+run_perlcritic()
+{
+    perlcritic "$@" >> "$target" && return
+    rc=$?
+    [ $rc -eq 2 ] || exit $rc
+}
+
+run_perlcritic "$@" localehelper
+run_perlcritic "$@" --exclude '::(Modules::RequireEndWithOne|Modules::RequireExplicitPackage)\b' t/*.t
+rc=0
+grep -v ' source OK$' "$target" && rc=1
+rm -f "$target"
+exit $rc
+
+# vim:ts=4 sts=4 sw=4 et
