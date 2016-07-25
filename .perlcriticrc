@@ -21,8 +21,8 @@ only_in_void_context = 1
 [InputOutput::RequireBriefOpen]
 lines = 20
 
-[-InputOutput::RequireCheckedOpen]
 [-InputOutput::RequireCheckedClose]
+[-InputOutput::RequireCheckedOpen]
 # already covered by RequireCheckedSyscalls
 
 [InputOutput::RequireCheckedSyscalls]
@@ -31,25 +31,30 @@ functions = :builtins
 [-Modules::RequireVersionVar]
 # useful only for modules
 
+[-RegularExpressions::ProhibitEnumeratedClasses]
+# we work mostly with ASCII
+
+[-RegularExpressions::RequireDotMatchAnything]
+# we work mostly with single-line strings
+# reconsider when https://github.com/Perl-Critic/Perl-Critic/issues/551 is fixed
+
 [-RegularExpressions::RequireExtendedFormatting]
 # no, thanks
 
-[-RegularExpressions::RequireDotMatchAnything]
 [-RegularExpressions::RequireLineBoundaryMatching]
 # we work mostly with single-line strings
 # reconsider when https://github.com/Perl-Critic/Perl-Critic/issues/551 is fixed
 
-[-RegularExpressions::ProhibitEnumeratedClasses]
-# we work mostly with ASCII
-
 [-Subroutines::ProhibitSubroutinePrototypes]
 # no, thanks
 
-[-ValuesAndExpressions::ProhibitNoisyQuotes]
 [-ValuesAndExpressions::ProhibitEmptyQuotes]
 # no, thanks
 
 [-ValuesAndExpressions::ProhibitMagicNumbers]
+# no, thanks
+
+[-ValuesAndExpressions::ProhibitNoisyQuotes]
 # no, thanks
 
 [-ValuesAndExpressions::ProhibitVersionStrings]
