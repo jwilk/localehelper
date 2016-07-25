@@ -28,6 +28,9 @@ lines = 20
 [InputOutput::RequireCheckedSyscalls]
 functions = :builtins
 
+[Modules::ProhibitExcessMainComplexity]
+max_mccabe = 30
+
 [-Modules::RequireVersionVar]
 # useful only for modules
 
