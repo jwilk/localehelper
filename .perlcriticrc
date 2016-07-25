@@ -1,5 +1,5 @@
 severity = 1
-verbose = 1
+verbose = %f:%l: [%p] %m\n
 
 [-CodeLayout::ProhibitParensWithBuiltins]
 # no, thanks
