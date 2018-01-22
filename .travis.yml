@@ -10,4 +10,4 @@ install:
 script:
 - make -C doc/
 - private/run-perlcritic
-- prove --verbose
+- make test
