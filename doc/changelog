@@ -1,8 +1,8 @@
-localehelper (0.1.5) UNRELEASED; urgency=low
+localehelper (0.1.5) unstable; urgency=low
 
   * Add Makefile.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Mon, 22 Jan 2018 13:31:02 +0100
+ -- Jakub Wilk <jwilk@jwilk.net>  Thu, 15 Feb 2018 20:11:49 +0100
 
 localehelper (0.1.4) unstable; urgency=low
 
