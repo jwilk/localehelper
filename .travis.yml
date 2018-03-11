@@ -12,7 +12,6 @@ script:
 - private/run-perlcritic
 - make test
 - make install PREFIX=~/.local
-- export PATH=~/.local/bin:"$PATH"
 - localehelper --help
 - export MANPATH=~/.local/share/man MANWIDTH=80
 - man 1 localehelper | grep -A 10 -w LOCALEHELPER
