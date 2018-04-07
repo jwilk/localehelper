@@ -36,7 +36,7 @@ install: localehelper
 	perl -MConfig -p -e '$$. == 1 and s/#!.*/$$Config{startperl}/' \
 		$(<) > $(DESTDIR)$(bindir)/$(<)
 	chmod 0755 $(DESTDIR)$(bindir)/$(<)
-ifeq "$(wildcard .git doc/localehelper.1)" ".git"
+ifeq "$(wildcard doc/localehelper.1)" ""
 	# run "$(MAKE) -C doc" to build the manpage
 else
 	install -d $(DESTDIR)$(mandir)/man1/
