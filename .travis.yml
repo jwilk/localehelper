@@ -8,6 +8,7 @@ install:
 - cpanm Perl::MinimumVersion
 - cpanm Perl::Critic
 script:
+- dpkg-parsechangelog -ldoc/changelog --all 2>&1 >/dev/null | { ! grep .; }
 - make -C doc/
 - private/run-perlcritic
 - make test
