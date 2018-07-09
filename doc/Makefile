@@ -5,7 +5,7 @@ version = $(shell head -n1 changelog | cut -d ' ' -f2 | tr -d '()')
 .PHONY: all
 all: $(name).1
 
-%.1: %.pod changelog
+$(name).1: manpage.pod changelog
 	sed -e 's/L<\([a-z_-]\+\)(\([0-9]\+\))>/B<\1>(\2)/' $(<) \
 	| pod2man --utf8 -c '' -n $(uname) -r '$(name) $(version)' \
 	> $(@).tmp
