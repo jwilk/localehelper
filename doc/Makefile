@@ -6,7 +6,7 @@ version = $(shell head -n1 changelog | cut -d ' ' -f2 | tr -d '()')
 all: $(name).1
 
 $(name).1: manpage.pod changelog
-	sed -e 's/L<\([a-z_-]\+\)(\([0-9]\+\))>/B<\1>(\2)/' $(<) \
+	perl -p -e 's/L<([a-z_-]+)[(]([0-9]+)[)]>/B<\1>(\2)/g' $(<) \
 	| pod2man --utf8 -c '' -n $(uname) -r '$(name) $(version)' \
 	> $(@).tmp
 	mv $(@).tmp $(@)
