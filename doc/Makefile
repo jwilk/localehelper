@@ -18,16 +18,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-name = localehelper
-uname = $(shell echo $(name) | LC_ALL=C tr a-z A-Z)
 version = $(shell head -n1 changelog | cut -d ' ' -f2 | tr -d '()')
 
 .PHONY: all
-all: $(name).1
+all: localehelper.1
 
-$(name).1: manpage.pod changelog
+localehelper.1: manpage.pod changelog
 	perl -p -e 's/L<([a-z_-]+)[(]([0-9]+)[)]>/B<\1>(\2)/g' $(<) \
-	| pod2man --utf8 -c '' -n $(uname) -r '$(name) $(version)' \
+	| pod2man --utf8 -c '' -n LOCALEHELPER -r 'localehelper $(version)' \
 	> $(@).tmp
 	mv $(@).tmp $(@)
 
