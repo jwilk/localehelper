@@ -1,5 +1,5 @@
 name = localehelper
-uname = $(shell echo $(name) | tr a-z A-Z)
+uname = $(shell echo $(name) | LC_ALL=C tr a-z A-Z)
 version = $(shell head -n1 changelog | cut -d ' ' -f2 | tr -d '()')
 
 .PHONY: all
