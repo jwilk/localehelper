@@ -3,7 +3,7 @@ sudo: false
 language: perl
 perl:
 - "5.10"
-- "5.26"
+- "5.28"
 install:
 - cpanm Perl::MinimumVersion
 - cpanm Perl::Critic
