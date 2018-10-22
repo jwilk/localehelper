@@ -27,7 +27,7 @@ B<localehelper> [-x I<locale>[,I<locale>...]] [I<intvar>=I<locale>[,I<locale-fal
 =cut
 
 # cwd in @INC is harmful:
-# http://www.nntp.perl.org/group/perl.perl5.porters/2010/08/msg162729.html
+# https://www.nntp.perl.org/group/perl.perl5.porters/2010/08/msg162729.html
 no lib '.';
 
 use strict;
