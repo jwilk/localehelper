@@ -34,8 +34,9 @@ all: ;
 install: localehelper
 	install -d -m755 $(DESTDIR)$(bindir)
 	perl -MConfig -p -e '$$. == 1 and s/#!.*/$$Config{startperl}/' \
-		$(<) > $(DESTDIR)$(bindir)/$(<)
-	chmod 0755 $(DESTDIR)$(bindir)/$(<)
+		$(<) > $(<).tmp
+	install $(<).tmp $(DESTDIR)$(bindir)/$(<)
+	rm $(<).tmp
 ifeq "$(wildcard doc/localehelper.1)" ""
 	# run "$(MAKE) -C doc" to build the manpage
 else
@@ -48,7 +49,8 @@ test:
 	prove --verbose
 
 .PHONY: clean
-clean: ;
+clean:
+	rm -f *.tmp
 
 .error = GNU make is required
 
