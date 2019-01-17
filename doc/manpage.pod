@@ -39,7 +39,7 @@ internationalization environment variable.
 
 =item B<-h>, B<--help>
 
-Display help and exit.
+Show help message and exit.
 
 =back
 
