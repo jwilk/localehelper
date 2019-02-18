@@ -47,6 +47,10 @@ endif
 test:
 	prove --verbose
 
+.PHONY: test-installed
+test-installed: $(or $(shell command -v localehelper;),$(bindir)/localehelper)
+	LOCALEHELPER_COMMANDLINE=localehelper prove --verbose
+
 .PHONY: clean
 clean:
 	rm -f *.tmp
