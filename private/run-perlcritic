@@ -12,7 +12,7 @@ cd "$here/.."
 perl -n -E 's/^\[-?// and s/\]$// and print' .perlcriticrc \
 | sort -c
 
-target=$(mktemp -t mbank-cli.perlcritic.XXXXXX)
+target=$(mktemp -t localehelper.perlcritic.XXXXXX)
 
 run_perlcritic()
 {
