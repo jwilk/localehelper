@@ -30,7 +30,14 @@ localehelper.1: manpage.pod changelog
 	mv $(@).tmp $(@)
 
 .PHONY: check
-check: manpage.pod
+check: check-changelog check-pod
+
+.PHONY: check-changelog
+check-changelog: changelog
+	dpkg-parsechangelog -l$(<) --all 2>&1 >/dev/null | { ! grep .; }
+
+.PHONY: check-pod
+check-pod: manpage.pod
 	podchecker -warnings -warnings $(<)
 
 .PHONY: clean
