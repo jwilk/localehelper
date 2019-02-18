@@ -23,7 +23,6 @@ PERL = perl
 PREFIX = /usr/local
 DESTDIR =
 
-prefix = /usr/local
 bindir = $(PREFIX)/bin
 mandir = $(PREFIX)/share/man
 
