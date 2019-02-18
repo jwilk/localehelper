@@ -1,8 +1,12 @@
 localehelper (0.1.6) UNRELEASED; urgency=low
 
-  * 
+  * Improve the build system:
+    + Use install(1) to install the executable.
+    + Add test-installed target.
+  * Improve documentation:
+    + Rephrase description of the --help option.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Thu, 15 Nov 2018 11:19:48 +0100
+ -- Jakub Wilk <jwilk@jwilk.net>  Mon, 18 Feb 2019 10:07:03 +0100
 
 localehelper (0.1.5) unstable; urgency=low
 
