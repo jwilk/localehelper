@@ -10,6 +10,7 @@ before_install:
 install:
 - cpanm Perl::MinimumVersion
 - cpanm Perl::Critic
+- python -m pip install --user docutils pygments
 script:
 - make -C doc/
 - make -C doc/ check
