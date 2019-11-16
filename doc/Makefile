@@ -30,7 +30,7 @@ localehelper.1: manpage.pod changelog
 	mv $(@).tmp $(@)
 
 .PHONY: check
-check: check-changelog check-pod
+check: check-changelog check-pod check-rst
 
 .PHONY: check-changelog
 check-changelog: changelog
@@ -39,6 +39,12 @@ check-changelog: changelog
 .PHONY: check-pod
 check-pod: manpage.pod
 	podchecker -warnings -warnings $(<)
+
+rst2xml = $(notdir $(shell command -v rst2xml || echo rst2xml.py))
+
+.PHONY: check-rst
+check-rst:
+	$(rst2xml) --input-encoding=UTF-8 --strict README /dev/null
 
 .PHONY: clean
 clean:
