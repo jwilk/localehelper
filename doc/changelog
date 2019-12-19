@@ -1,12 +1,17 @@
 localehelper (0.1.6) UNRELEASED; urgency=low
 
   * Improve the build system:
+    + Add checks against BSD make.
     + Use install(1) to install the executable.
-    + Add test-installed target.
+    + Add “test-installed” target.
   * Improve documentation:
     + Rephrase description of the --help option.
+    + Use HTTPS for pubs.opengroup.org.
+  * Improve the test suite:
+    + Fix script shebangs.
+    + Make kill(1) call more portable.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Mon, 18 Feb 2019 10:07:03 +0100
+ -- Jakub Wilk <jwilk@jwilk.net>  Thu, 19 Dec 2019 16:12:20 +0100
 
 localehelper (0.1.5) unstable; urgency=low
 
