@@ -1,4 +1,4 @@
-localehelper (0.1.6) UNRELEASED; urgency=low
+localehelper (0.1.6) unstable; urgency=low
 
   * Improve the build system:
     + Add checks against BSD make.
@@ -11,7 +11,7 @@ localehelper (0.1.6) UNRELEASED; urgency=low
     + Fix script shebangs.
     + Make kill(1) call more portable.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Thu, 19 Dec 2019 16:12:20 +0100
+ -- Jakub Wilk <jwilk@jwilk.net>  Fri, 20 Dec 2019 15:51:15 +0100
 
 localehelper (0.1.5) unstable; urgency=low
 
