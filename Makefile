@@ -31,7 +31,7 @@ all: ;
 
 .PHONY: install
 install: localehelper
-	install -d -m755 $(DESTDIR)$(bindir)
+	install -d $(DESTDIR)$(bindir)
 	perl -MConfig -p -e '$$. == 1 and s/#!.*/$$Config{startperl}/' \
 		$(<) > $(<).tmp
 	install $(<).tmp $(DESTDIR)$(bindir)/$(<)
