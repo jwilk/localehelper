@@ -5,12 +5,16 @@ jobs:
   - perl: "5.10"
     dist: trusty
   - perl: "5.30"
+addons:
+  apt:
+    packages:
+    - python3-pip
 before_install:
 - export PERL_CPANM_OPT='--no-interactive --no-man-pages --notest --skip-satisfied'
 install:
 - cpanm Perl::MinimumVersion
 - cpanm Perl::Critic
-- python -m pip install --user docutils pygments
+- python3 -m pip install --user docutils pygments
 script:
 - make -C doc/
 - make -C doc/ check
