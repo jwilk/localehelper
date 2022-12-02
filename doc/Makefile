@@ -44,7 +44,7 @@ rst2xml = $(notdir $(shell command -v rst2xml || echo rst2xml.py))
 
 .PHONY: check-rst
 check-rst:
-	$(rst2xml) --input-encoding=UTF-8 --strict README /dev/null
+	$(rst2xml) --input-encoding=UTF-8 --strict README > /dev/null
 
 .PHONY: clean
 clean:
