@@ -34,7 +34,6 @@ use strict;
 use warnings;
 
 use v5.10;
-no if $] >= 5.018, warnings => 'experimental::smartmatch';
 
 use English qw(-no_match_vars);
 use File::Temp qw();
@@ -150,32 +149,29 @@ sub diag(@)
 my @extra_locales = ();
 my %env = ();
 while (scalar(@ARGV) > 0) {
-    given ($ARGV[0]) {
-        when (m/^($category_re)=(.*)$/) {
-            my ($category, $locale) = ($1, $2);
-            $env{$category} = $locale;
-            shift @ARGV;
-        }
-        when ('-x') {
-            shift @ARGV;
-            if (not @ARGV) {
-                diag('error: -x requires an argument');
-                exit 1;
-            }
-            push @extra_locales, split(m/,/, shift @ARGV);
-        }
-        when (['-h', '--help']) {
-            show_usage();
-            exit 0;
-        }
-        when ('--') {
-            shift @ARGV;
-            last;
-        }
-        default {
-            last;
-        }
+    $_ = $ARGV[0];
+    if (m/^($category_re)=(.*)$/) {
+        my ($category, $locale) = ($1, $2);
+        $env{$category} = $locale;
+        shift @ARGV;
     }
+    if ($_ eq '-x') {
+        shift @ARGV;
+        if (not @ARGV) {
+            diag('error: -x requires an argument');
+            exit 1;
+        }
+        push @extra_locales, split(m/,/, shift @ARGV);
+    }
+    if ($_ eq '-h' or $_ eq '--help') {
+        show_usage();
+        exit 0;
+    }
+    if ($_ eq '--') {
+        shift @ARGV;
+        last;
+    }
+    last;
 }
 
 if (not @ARGV) {
