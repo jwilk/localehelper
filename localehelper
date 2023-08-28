@@ -154,6 +154,7 @@ while (scalar(@ARGV) > 0) {
         my ($category, $locale) = ($1, $2);
         $env{$category} = $locale;
         shift @ARGV;
+        next;
     }
     if ($_ eq '-x') {
         shift @ARGV;
@@ -162,6 +163,7 @@ while (scalar(@ARGV) > 0) {
             exit 1;
         }
         push @extra_locales, split(m/,/, shift @ARGV);
+        next;
     }
     if ($_ eq '-h' or $_ eq '--help') {
         show_usage();
