@@ -30,11 +30,15 @@ use v5.10;
 use English qw(-no_match_vars);
 use FindBin ();
 
-use Test::More tests => 2;
+use Test::More tests => 4;
 
 my $exe = $ENV{LOCALEHELPER_COMMANDLINE} // "$FindBin::Bin/../localehelper";
 my $output = qx($exe LANG=es_ES.UTF-8 locale mon);
-is($CHILD_ERROR, 0, 'exit code 0');
-is($output, "enero;febrero;marzo;abril;mayo;junio;julio;agosto;septiembre;octubre;noviembre;diciembre\n", 'correctly localized output');
+is($CHILD_ERROR, 0, 'LANG exit code');
+is($output, "enero;febrero;marzo;abril;mayo;junio;julio;agosto;septiembre;octubre;noviembre;diciembre\n", 'LANG output');
+
+$output = qx($exe LANG=C LC_CTYPE=es_ES.UTF-8 locale charmap);
+is($CHILD_ERROR, 0, 'LANG+LC_CTYPE exit code');
+is($output, "UTF-8\n", 'LANG+LC_CTYPE charmap');
 
 # vim:ts=4 sts=4 sw=4 et
