@@ -1,7 +1,7 @@
 localehelper (0.1.7) unstable; urgency=low
 
   * Stop using switch statements (deprecated in Perl v5.38).
-    Thanks to  Niko Tyni for the bug report.
+    Thanks toNiko Tyni for the bug report.
     https://bugs.debian.org/1042525
 
  -- Jakub Wilk <jwilk@jwilk.net>  Mon, 28 Aug 2023 13:51:18 +0200
