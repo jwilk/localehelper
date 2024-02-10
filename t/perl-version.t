@@ -27,11 +27,16 @@ use warnings;
 
 use v5.10;
 
-use Test::More tests => 1;
+use Test::More;
 
 use Perl::MinimumVersion ();
 
 use FindBin ();
+
+if (defined $ENV{LOCALEHELPER_TEST_TARGET}) {
+    plan skip_all => '$LOCALEHELPER_TEST_TARGET is set';  ## no critic (RequireInterpolation)
+}
+plan tests => 1;
 
 my $exe = "$FindBin::Bin/../localehelper";
 
