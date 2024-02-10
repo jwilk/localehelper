@@ -32,7 +32,7 @@ use FindBin ();
 
 use Test::More tests => 1;
 
-my $exe = $ENV{LOCALEHELPER_COMMANDLINE} // "$FindBin::Bin/../localehelper";
+my $exe = $ENV{LOCALEHELPER_TEST_TARGET} // "$FindBin::Bin/../localehelper";
 my $output = qx($exe LANG=es_ES.UTF-8 sh -c 'kill -s ABRT \$\$');
 is($CHILD_ERROR, 1 << 8, 'exit code 1');
 

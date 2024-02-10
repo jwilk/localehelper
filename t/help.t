@@ -32,7 +32,7 @@ use FindBin ();
 
 use Test::More tests => 2;
 
-my $exe = $ENV{LOCALEHELPER_COMMANDLINE} // "$FindBin::Bin/../localehelper";
+my $exe = $ENV{LOCALEHELPER_TEST_TARGET} // "$FindBin::Bin/../localehelper";
 my $output = qx($exe --help 2>&1);
 $output =~ s/unexpected OP_PADRANGE at .+\n//;  # https://bugs.debian.org/789487
 is($CHILD_ERROR, 0, 'exit code 0');

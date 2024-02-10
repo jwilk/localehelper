@@ -32,7 +32,7 @@ use FindBin ();
 
 use Test::More tests => 4;
 
-my $exe = $ENV{LOCALEHELPER_COMMANDLINE} // "$FindBin::Bin/../localehelper";
+my $exe = $ENV{LOCALEHELPER_TEST_TARGET} // "$FindBin::Bin/../localehelper";
 
 sub t{
     my ($locale) = @_;

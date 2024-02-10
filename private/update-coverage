@@ -2,6 +2,6 @@
 set -e -u
 here=$(dirname "$0")
 cd "$here/.."
-export LOCALEHELPER_COMMANDLINE='perl -MDevel::Cover=-silent,1 ./localehelper'
+export LOCALEHELPER_TEST_TARGET='perl -MDevel::Cover=-silent,1 ./localehelper'
 prove -v
 exec cover
