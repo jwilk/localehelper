@@ -43,7 +43,9 @@ jobs:
         make install PREFIX=~/.local
     - name: run post-install tests
       run: |
+        rm localehelper
         make test-installed
+        git restore localehelper
         cd /
         localehelper --help
         export MANPATH=~/.local/share/man MANWIDTH=80
