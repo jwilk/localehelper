@@ -37,6 +37,9 @@ jobs:
     - name: run perlcritic
       run: |
         private/run-perlcritic
+    - name: check libc packages versions
+      run:
+        dpkg-query -W locales locales-all libc-bin
     - name: run tests
       run: |
         make test
